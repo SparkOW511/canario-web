@@ -1,11 +1,380 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canario</title>
+    <title>Canario – Pametni smetnjak za čistejšo Zemljo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Spletna stran Canario</h1>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="#domov" class="nav__logo">
+            <img src="assets/logo_1-removebg-preview.png" alt="Canario logotip" class="nav__logo-img">
+        </a>
+
+        <ul class="nav__links" id="navLinks">
+            <li><a href="#domov" class="nav__link">Domov</a></li>
+            <li><a href="#o-nas" class="nav__link">O nas</a></li>
+            <li><a href="#izdelek" class="nav__link">Izdelek</a></li>
+            <li><a href="#ekipa" class="nav__link">Ekipa</a></li>
+            <li><a href="#kontakt" class="nav__link">Kontakt</a></li>
+        </ul>
+
+        <div class="nav__actions">
+            <button class="nav__icon-btn" id="themeToggle" aria-label="Preklop teme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav__hamburger" id="hamburger" aria-label="Odpri meni">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="domov" class="hero">
+    <div class="hero__bg-shapes">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__leaf hero__leaf--1">
+            <svg viewBox="0 0 80 80" fill="none"><path d="M40 4C40 4 8 20 8 48c0 16 14 28 32 28s32-12 32-28C72 20 40 4 40 4z" fill="currentColor"/><path d="M40 16v56M28 36l12 12M52 28L40 40" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="hero__leaf hero__leaf--2">
+            <svg viewBox="0 0 60 60" fill="none"><path d="M30 2C30 2 6 14 6 36c0 12 10 22 24 22s24-10 24-22C54 14 30 2 30 2z" fill="currentColor"/><path d="M30 10v42M20 28l10 10M40 22L30 32" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+    </div>
+    <div class="container hero__inner">
+        <div class="hero__text" data-animate="fade-up">
+            <span class="hero__badge"><i class="fa-solid fa-seedling"></i> Dijaško podjetje</span>
+            <h1 class="hero__title">Pametnejše ločevanje za <em>čistejšo Zemljo</em></h1>
+            <p class="hero__desc">Canario je pametni smetnjak, ki s pomočjo senzorjev samodejno loči mokre in suhe odpadke. Manj napak, več recikliranja, boljša prihodnost.</p>
+            <div class="hero__ctas">
+                <a href="#izdelek" class="btn btn--primary">
+                    <i class="fa-solid fa-arrow-down"></i> Spoznaj izdelek
+                </a>
+            </div>
+            <div class="hero__stats">
+                <div class="hero__stat">
+                    <strong>41%</strong>
+                    <span>ljudi ne ločuje</span>
+                </div>
+                <div class="hero__stat-divider"></div>
+                <div class="hero__stat">
+                    <strong>79%</strong>
+                    <span>bi kupilo smetnjak</span>
+                </div>
+                <div class="hero__stat-divider"></div>
+                <div class="hero__stat">
+                    <strong>84%</strong>
+                    <span>bi ga priporočilo</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero__visual" data-animate="fade-up" data-delay="200">
+            <div class="hero__image-wrap">
+                <img src="assets/promo.png" alt="Canario pametni smetnjak">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== O NAS ===== -->
+<section id="o-nas" class="section">
+    <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-header__label"><i class="fa-solid fa-leaf"></i> O nas</span>
+            <h2 class="section-header__title">Zakaj smo ustanovili <em>Canario</em>?</h2>
+            <p class="section-header__desc">Canario d.d. je dijaško start-up podjetje, ustanovljeno septembra 2025, ki se zavzema za kvalitetnejše ločevanje odpadkov in čistočo Zemlje.</p>
+        </div>
+
+        <div class="features-grid" data-animate="fade-up" data-delay="100">
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <i class="fa-solid fa-earth-europe"></i>
+                </div>
+                <h3 class="feature-card__title">Problem</h3>
+                <p class="feature-card__text">Kar 41 % ljudi po svetu ne ločuje odpadkov. Nepravilno ravnanje povzroča onesnaževanje tal, vode in zraka ter ogroža zdravje ljudi in živali.</p>
+                <button class="feature-card__toggle" data-toggle="problem-detail">Preberi več <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="feature-card__detail" id="problem-detail">
+                    <p>Ko se različni odpadki mešajo in razpadajo na odlagališčih ali v naravi, iz njih nastanejo škodljive snovi, ki poniknejo v zemljo. Dež lahko iz mešanih odpadkov izpira kemikalije, ki nato pridejo v podtalnico, reke ali morje. Živali lahko pridejo v stik z odpadki, jih zaužijejo ali se vanje zapletejo.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="feature-card__title">Rešitev</h3>
+                <p class="feature-card__text">Canario s senzorji za vlago samodejno prepozna vrsto odpadka in ga preusmeri v pravilni predal – brez človeške napake.</p>
+                <button class="feature-card__toggle" data-toggle="resitev-detail">Preberi več <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="feature-card__detail" id="resitev-detail">
+                    <p>Uporabnik preprosto odloži odpadek v vhod smetnjaka, senzorji pa ga samodejno preusmerijo v ustrezno predelno enoto. Sistem deluje hitro, tiho in brez potrebe po ročnem razvrščanju. Primeren je za domačo rabo, šole, bolnišnice, pisarne in javne ustanove.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="feature-card__title">Inovativnost</h3>
+                <p class="feature-card__text">Eden prvih pametnih smetnjakov v Evropi, ki mokre in suhe odpadke ločuje v enem samodejnem sistemu z naprednimi senzorji.</p>
+                <button class="feature-card__toggle" data-toggle="inovativnost-detail">Preberi več <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="feature-card__detail" id="inovativnost-detail">
+                    <p>Canario je eden prvih pametnih smetnjakov, ki ločevanje mokre in suhe odpadke v enem samodejnem sistemu. Napredni senzorji omogočajo natančno prepoznavanje odpadkov. Prilagodljiv dizajn omogoča uporabo v majhnih gospodinjstvih in v večjih ustanovah.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <i class="fa-solid fa-recycle"></i>
+                </div>
+                <h3 class="feature-card__title">Trajnost</h3>
+                <p class="feature-card__text">Modularne predelne enote za enostavno čiščenje, zamenljive baterije in dolga življenjska doba zmanjšujejo odpadke.</p>
+                <button class="feature-card__toggle" data-toggle="trajnost-detail">Preberi več <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="feature-card__detail" id="trajnost-detail">
+                    <p>Predelne enote so modularne – hitro in preprosto se jih odstrani za praznjenje ali čiščenje. Napredna tehnologija deluje na baterije, ki jih je mogoče zamenjati, kar zagotavlja zanesljiv sistem skozi leta uporabe.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== IZDELEK ===== -->
+<section id="izdelek" class="section section--tinted">
+    <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-header__label"><i class="fa-solid fa-box-open"></i> Izdelek</span>
+            <h2 class="section-header__title">Spoznajte <em>Canario</em></h2>
+            <p class="section-header__desc">Pametni smetnjak, ki odpravlja najpogostejši vzrok napačnega ločevanja: človeško napako.</p>
+        </div>
+
+        <div class="product-layout" data-animate="fade-up" data-delay="100">
+            <div class="product-image">
+                <div class="product-image__logos">
+                    <div class="product-image__logo-item">
+                        <img src="assets/sola.png" alt="Šola">
+                        <span>Šola</span>
+                    </div>
+                    <div class="product-image__logo-item">
+                        <img src="assets/tekmovanje.png" alt="Tekmovanje">
+                        <span>Tekmovanje</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <div class="product-accordion">
+                    <div class="accordion-item active">
+                        <button class="accordion-item__header">
+                            <span><i class="fa-solid fa-gears"></i> Kako deluje?</span>
+                            <i class="fa-solid fa-chevron-down accordion-item__arrow"></i>
+                        </button>
+                        <div class="accordion-item__body">
+                            <p>Uporabnik preprosto odloži odpadek v vhod smetnjaka. Senzorji za prepoznavanje objekta in vlago samodejno preusmerijo odpadek v ustrezno predelno enoto – hitro, tiho in brez ročnega razvrščanja.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-item__header">
+                            <span><i class="fa-solid fa-users"></i> Za koga je primeren?</span>
+                            <i class="fa-solid fa-chevron-down accordion-item__arrow"></i>
+                        </button>
+                        <div class="accordion-item__body">
+                            <p>Za domačo rabo, šole, bolnišnice, pisarne, javne ustanove, nakupovalne centre, letališča in velika podjetja. Prilagodljiv dizajn omogoča uporabo v različnih okoljih.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-item__header">
+                            <span><i class="fa-solid fa-wrench"></i> Vzdrževanje</span>
+                            <i class="fa-solid fa-chevron-down accordion-item__arrow"></i>
+                        </button>
+                        <div class="accordion-item__body">
+                            <p>Modularne predelne enote za hitro praznjenje in čiščenje. Zamenljive baterije zagotavljajo dolgoročno zanesljivost sistema senzorjev.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-item__header">
+                            <span><i class="fa-solid fa-rocket"></i> Načrti za prihodnost</span>
+                            <i class="fa-solid fa-chevron-down accordion-item__arrow"></i>
+                        </button>
+                        <div class="accordion-item__body">
+                            <p>Nadgradnja z umetno inteligenco za ločevanje suhih odpadkov na plastiko in papir – še natančnejše razvrščanje odpadkov.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EKIPA ===== -->
+<section id="ekipa" class="section">
+    <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-header__label"><i class="fa-solid fa-people-group"></i> Ekipa</span>
+            <h2 class="section-header__title">Ljudje za <em>Canariom</em></h2>
+            <p class="section-header__desc">Pet motiviranih dijakov, ki skupaj uresničujemo idejo pametnejšega ravnanja z odpadki.</p>
+        </div>
+
+        <div class="team-photo" data-animate="fade-up" data-delay="100">
+            <img src="assets/ekipa.jpg" alt="Ekipa Canario">
+        </div>
+
+        <div class="team-grid" data-animate="fade-up" data-delay="200">
+            <div class="team-card">
+                <div class="team-card__avatar">NS</div>
+                <h3 class="team-card__name">Nika Stepančič</h3>
+                <span class="team-card__role">Direktorica</span>
+                <p class="team-card__bio">Nadzira in razporeja delo tako, da podjetje deluje čim bolj tekoče. S predanostjo vodi ekipo k uspehom.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-card__avatar">GB</div>
+                <h3 class="team-card__name">Gaia Bubnič</h3>
+                <span class="team-card__role">Vodja financ</span>
+                <p class="team-card__bio">Skrbi za finančno stabilnost, načrtovanje proračuna in nadzor stroškov razvoja smetnjaka.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-card__avatar">AF</div>
+                <h3 class="team-card__name">Alja Filipčič</h3>
+                <span class="team-card__role">Promocija</span>
+                <p class="team-card__bio">Načrtuje in izvaja promocijske strategije, s katerimi Canario približa svoj izdelek uporabnikom.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-card__avatar">AG</div>
+                <h3 class="team-card__name">Amadej Goja</h3>
+                <span class="team-card__role">Proizvodnja</span>
+                <p class="team-card__bio">Organizira proizvodni proces, nadzoruje kakovost in zagotavlja pravočasno izdelavo smetnjakov.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-card__avatar">VP</div>
+                <h3 class="team-card__name">Vita Petrovič</h3>
+                <span class="team-card__role">Kadrovska služba</span>
+                <p class="team-card__bio">Skrbi za zaposlene, iskanje novih sodelavcev in motivacijo ekipe za nadaljnji razvoj.</p>
+            </div>
+        </div>
+
+        <p class="team-mentor" data-animate="fade-up" data-delay="300">Mentorica: <strong>Urška Potočnik Božoč</strong></p>
+    </div>
+</section>
+
+<!-- ===== KONTAKT ===== -->
+<section id="kontakt" class="section section--tinted">
+    <div class="container">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-header__label"><i class="fa-solid fa-envelope"></i> Kontakt</span>
+            <h2 class="section-header__title">Stopite v <em>stik</em></h2>
+            <p class="section-header__desc">Vas zanima pametni smetnjak Canario? Pišite nam in odgovorili vam bomo v najkrajšem času.</p>
+        </div>
+
+        <div class="contact-layout" data-animate="fade-up" data-delay="100">
+            <form class="contact-form" id="contactForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Ime in priimek <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="Npr. Janez Novak" required>
+                        <span class="form-error" id="nameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-pošta <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="janez@primer.si" required>
+                        <span class="form-error" id="emailError"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+386 40 123 456">
+                        <span class="form-error" id="phoneError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Zadeva <span class="required">*</span></label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Izberite zadevo...</option>
+                            <option value="info">Splošne informacije</option>
+                            <option value="nakup">Nakup izdelka</option>
+                            <option value="sodelovanje">Poslovno sodelovanje</option>
+                            <option value="mediji">Mediji in PR</option>
+                            <option value="drugo">Drugo</option>
+                        </select>
+                        <span class="form-error" id="subjectError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Sporočilo <span class="required">*</span></label>
+                    <textarea id="message" name="message" rows="5" placeholder="Vaše sporočilo..." required></textarea>
+                    <span class="form-error" id="messageError"></span>
+                </div>
+
+                <div class="form-group form-group--checkbox">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy">Strinjam se s pogoji zasebnosti <span class="required">*</span></label>
+                    <span class="form-error" id="privacyError"></span>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--full">
+                    <i class="fa-solid fa-paper-plane"></i> Pošlji sporočilo
+                </button>
+                <div class="form-success" id="formSuccess">
+                    <i class="fa-solid fa-circle-check"></i> Sporočilo je bilo uspešno poslano! Hvala za vaše zanimanje.
+                </div>
+            </form>
+
+            <div class="contact-sidebar">
+                <div class="contact-card">
+                    <div class="contact-card__icon"><i class="fa-solid fa-building"></i></div>
+                    <h3>Podatki o podjetju</h3>
+                    <ul>
+                        <li><strong>Podjetje:</strong> Canario d.d.</li>
+                        <li><strong>Ustanovljeno:</strong> September 2025</li>
+                        <li><strong>Dejavnost:</strong> Pametno ločevanje odpadkov</li>
+                    </ul>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card__icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3>Ciljni trg</h3>
+                    <p>Občine, šole, bolnišnice, komunalna podjetja, nakupovalni centri, letališča in gospodinjstva po Sloveniji.</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card__icon"><i class="fa-solid fa-chart-simple"></i></div>
+                    <h3>Anketa</h3>
+                    <p><strong>79 %</strong> anketirancev bi razmislilo o nakupu. <strong>84 %</strong> bi ga priporočilo drugim.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <img src="assets/logo_1-removebg-preview.png" alt="Canario" class="footer__logo">
+                <p>Pametnejše ločevanje za čistejšo Zemljo.</p>
+            </div>
+            <div class="footer__nav">
+                <h4>Navigacija</h4>
+                <a href="#domov">Domov</a>
+                <a href="#o-nas">O nas</a>
+                <a href="#izdelek">Izdelek</a>
+                <a href="#ekipa">Ekipa</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Canario d.d. Vse pravice pridržane.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
