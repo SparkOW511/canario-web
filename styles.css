@@ -1549,7 +1549,6 @@ em {
     .hero__desc { margin: 0 auto var(--space-xl); }
     .hero__ctas { justify-content: center; }
     .hero__stats { justify-content: center; flex-wrap: wrap; }
-    .hero__visual { }
 
     .features-grid { grid-template-columns: 1fr; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
