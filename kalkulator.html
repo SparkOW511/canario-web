@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="sl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finančni kalkulator – Canario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="kalkulator.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="index.html" class="nav__logo">
+            <img src="assets/logo_1-removebg-preview.png" alt="Canario logotip" class="nav__logo-img">
+        </a>
+        <ul class="nav__links" id="navLinks">
+            <li><a href="index.html" class="nav__link">Domov</a></li>
+            <li><a href="galerija.html" class="nav__link">Galerija</a></li>
+            <li><a href="kalkulator.html" class="nav__link active">Kalkulator</a></li>
+            <li><a href="igra.html" class="nav__link">Igra</a></li>
+        </ul>
+        <div class="nav__actions">
+            <button class="nav__icon-btn" id="themeToggle" aria-label="Preklop teme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav__hamburger" id="hamburger" aria-label="Odpri meni">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="page-hero">
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Nazaj na domov</a>
+        <h1 class="page-hero__title">Finančni <em>kalkulator</em></h1>
+        <p class="page-hero__desc">Izračunajte prihranke pri ločevanju odpadkov s pametnim smetnjakom Canario.</p>
+    </div>
+</section>
+
+<!-- ===== CALCULATOR ===== -->
+<section class="calc-section">
+    <div class="container">
+        <div class="calc-layout">
+            <div class="calc-panel">
+                <h2 class="calc-panel__title"><i class="fa-solid fa-sliders"></i> Parametri</h2>
+
+                <div class="calc-group">
+                    <label for="members">Število članov gospodinjstva</label>
+                    <input type="number" id="members" value="4" min="1" max="20">
+                    <small>Povprečno gospodinjstvo ima 3–4 člane</small>
+                </div>
+
+                <div class="calc-row">
+                    <div class="calc-group">
+                        <label for="wasteKg">Odpadki na mesec (kg)</label>
+                        <input type="number" id="wasteKg" value="80" min="10" max="500">
+                    </div>
+                    <div class="calc-group">
+                        <label for="sortRate">Trenutna stopnja ločevanja (%)</label>
+                        <input type="number" id="sortRate" value="50" min="0" max="100">
+                    </div>
+                </div>
+
+                <div class="calc-row">
+                    <div class="calc-group">
+                        <label for="penaltyFee">Kazen za neločevanje (EUR/mesec)</label>
+                        <input type="number" id="penaltyFee" value="15" min="0" max="200" step="0.5">
+                    </div>
+                    <div class="calc-group">
+                        <label for="canarioPrice">Cena Canario smetnjaka (EUR)</label>
+                        <input type="number" id="canarioPrice" value="135">
+                    </div>
+                </div>
+
+                <div class="calc-group">
+                    <label for="years">Obdobje izračuna (let)</label>
+                    <select id="years">
+                        <option value="1">1 leto</option>
+                        <option value="2">2 leti</option>
+                        <option value="3" selected>3 leta</option>
+                        <option value="5">5 let</option>
+                        <option value="10">10 let</option>
+                    </select>
+                </div>
+
+                <button class="btn btn--primary btn--full" id="calcBtn">
+                    <i class="fa-solid fa-calculator"></i> Izračunaj
+                </button>
+            </div>
+
+            <div>
+                <div class="calc-panel">
+                    <h2 class="calc-panel__title"><i class="fa-solid fa-chart-line"></i> Rezultati</h2>
+                    <div class="result-cards">
+                        <div class="result-card">
+                            <span class="result-card__label">Prihranki pri kaznih</span>
+                            <span class="result-card__value result-card__value--positive" id="resPenalty">0 EUR</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-card__label">Stroški odvoza (prihranek)</span>
+                            <span class="result-card__value result-card__value--positive" id="resTransport">0 EUR</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-card__label">Cena smetnjaka</span>
+                            <span class="result-card__value" id="resPrice" style="color: var(--danger);">–199 EUR</span>
+                        </div>
+                        <div class="result-card result-card--highlight">
+                            <span class="result-card__label">Skupni prihranek</span>
+                            <span class="result-card__value" id="resTotal">0 EUR</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-card__label">Povračilo investicije</span>
+                            <span class="result-card__value" id="resRoi" style="color: var(--c-primary);">– mesecev</span>
+                        </div>
+                    </div>
+
+                    <div class="eco-stats">
+                        <div class="eco-stat">
+                            <i class="fa-solid fa-recycle"></i>
+                            <div class="eco-stat__text">
+                                <strong id="ecoRecycled">0 kg</strong>
+                                Več recikliranega
+                            </div>
+                        </div>
+                        <div class="eco-stat">
+                            <i class="fa-solid fa-leaf"></i>
+                            <div class="eco-stat__text">
+                                <strong id="ecoCo2">0 kg CO₂</strong>
+                                Manj izpustov
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <img src="assets/logo_1-removebg-preview.png" alt="Canario" class="footer__logo">
+                <p>Pametnejše ločevanje za čistejšo Zemljo.</p>
+            </div>
+            <div class="footer__nav">
+                <h4>Navigacija</h4>
+                <a href="index.html">Domov</a>
+                <a href="index.html#o-nas">O nas</a>
+                <a href="index.html#izdelek">Izdelek</a>
+                <a href="index.html#ekipa">Ekipa</a>
+                <a href="index.html#kontakt">Kontakt</a>
+            </div>
+            <div class="footer__nav">
+                <h4>Strani</h4>
+                <a href="galerija.html"><i class="fa-solid fa-images"></i> Galerija slik</a>
+                <a href="kalkulator.html"><i class="fa-solid fa-calculator"></i> Finančni kalkulator</a>
+                <a href="igra.html"><i class="fa-solid fa-gamepad"></i> Preprosta igra</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Canario d.d. Vse pravice pridržane.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="kalkulator.js"></script>
+</body>
+</html>

@@ -1428,7 +1428,7 @@ em {
 }
 
 .footer__logo {
-    height: 64px;
+    height: 80px;
     width: auto;
     object-fit: contain;
     margin-bottom: var(--space-md);
@@ -1460,6 +1460,11 @@ em {
 }
 
 .footer__nav a:hover { opacity: 1; }
+
+.footer__nav a i {
+    margin-right: 6px;
+    font-size: var(--fs-xs);
+}
 
 .footer__bottom {
     text-align: center;

@@ -33,6 +33,7 @@
     // ===== 1. CONTACT FORM VALIDATION =====
     var contactForm = document.getElementById('contactForm');
     var formSuccess = document.getElementById('formSuccess');
+    if (contactForm) {
 
     var fields = {
         name: {
@@ -130,6 +131,7 @@
             setTimeout(function () { formSuccess.classList.remove('visible'); }, 5000);
         }
     });
+    } // end contactForm guard
 
     // ===== 2. LIGHT/DARK THEME TOGGLE =====
     var themeToggle = document.getElementById('themeToggle');
