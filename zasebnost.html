@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="sl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pogoji zasebnosti – Canario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <style>
+        .privacy {
+            padding: var(--space-2xl) 0;
+        }
+
+        .privacy__content {
+            max-width: 760px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl) var(--space-2xl);
+        }
+
+        .privacy__content h2 {
+            font-family: var(--ff-display);
+            font-size: var(--fs-h3);
+            font-weight: 700;
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .privacy__content h2:first-child {
+            margin-top: 0;
+        }
+
+        .privacy__content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+        }
+
+        .privacy__content ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-lg);
+        }
+
+        .privacy__content ul li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .privacy__content ul li::marker {
+            color: var(--c-primary);
+        }
+
+        .privacy__meta {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .privacy__meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: var(--fs-small);
+            color: var(--text-secondary);
+        }
+
+        .privacy__meta-item i {
+            color: var(--c-primary);
+        }
+
+        @media (max-width: 768px) {
+            .privacy__content {
+                padding: var(--space-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="index.html" class="nav__logo">
+            <img src="assets/logo_1-removebg-preview.png" alt="Canario logotip" class="nav__logo-img">
+        </a>
+        <ul class="nav__links" id="navLinks">
+            <li><a href="index.html" class="nav__link">Domov</a></li>
+            <li><a href="galerija.html" class="nav__link">Galerija</a></li>
+            <li><a href="kalkulator.html" class="nav__link">Kalkulator</a></li>
+            <li><a href="igra.html" class="nav__link">Igra</a></li>
+        </ul>
+        <div class="nav__actions">
+            <button class="nav__icon-btn" id="themeToggle" aria-label="Preklop teme">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav__hamburger" id="hamburger" aria-label="Odpri meni">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="page-hero">
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Nazaj na domov</a>
+        <h1 class="page-hero__title">Pogoji <em>zasebnosti</em></h1>
+        <p class="page-hero__desc">Vaša zasebnost nam je pomembna. Tukaj pojasnjujemo, kako ravnamo z vašimi podatki.</p>
+    </div>
+</section>
+
+<!-- ===== VSEBINA ===== -->
+<section class="privacy">
+    <div class="container">
+        <div class="privacy__content">
+
+            <div class="privacy__meta">
+                <div class="privacy__meta-item">
+                    <i class="fa-solid fa-calendar"></i>
+                    Zadnja posodobitev: april 2026
+                </div>
+                <div class="privacy__meta-item">
+                    <i class="fa-solid fa-building"></i>
+                    Canario d.d.
+                </div>
+            </div>
+
+            <h2>1. Upravljavec podatkov</h2>
+            <p>Upravljavec osebnih podatkov je Canario d.d., dijaško podjetje, ustanovljeno septembra 2025. Za vsa vprašanja v zvezi z zasebnostjo nas lahko kontaktirate prek kontaktnega obrazca na naši spletni strani.</p>
+
+            <h2>2. Katere podatke zbiramo</h2>
+            <p>Ob uporabi kontaktnega obrazca na naši spletni strani zbiramo naslednje podatke:</p>
+            <ul>
+                <li>Ime in priimek</li>
+                <li>E-poštni naslov</li>
+                <li>Telefonska številka (neobvezno)</li>
+                <li>Vsebina sporočila</li>
+                <li>Izbrana zadeva povpraševanja</li>
+            </ul>
+
+            <h2>3. Namen obdelave</h2>
+            <p>Vaše osebne podatke uporabljamo izključno za naslednje namene:</p>
+            <ul>
+                <li>Odgovor na vaše povpraševanje ali sporočilo</li>
+                <li>Komunikacija v zvezi z izdelkom Canario</li>
+                <li>Obveščanje o novostih, če ste v to privolili</li>
+            </ul>
+
+            <h2>4. Pravna podlaga</h2>
+            <p>Vaše podatke obdelujemo na podlagi vaše privolitve, ki jo podate ob pošiljanju kontaktnega obrazca. Privolitev lahko kadarkoli prekličete tako, da nas o tem obvestite.</p>
+
+            <h2>5. Hramba podatkov</h2>
+            <p>Vaše osebne podatke hranimo le toliko časa, kolikor je potrebno za izpolnitev namena, za katerega so bili zbrani. Po zaključku komunikacije podatke izbrišemo ali anonimiziramo v roku 12 mesecev.</p>
+
+            <h2>6. Varnost podatkov</h2>
+            <p>Sprejemamo ustrezne tehnične in organizacijske ukrepe za zaščito vaših osebnih podatkov pred nepooblaščenim dostopom, izgubo ali zlorabo.</p>
+
+            <h2>7. Vaše pravice</h2>
+            <p>V skladu z veljavno zakonodajo imate naslednje pravice:</p>
+            <ul>
+                <li>Pravica do dostopa do vaših osebnih podatkov</li>
+                <li>Pravica do popravka netočnih podatkov</li>
+                <li>Pravica do izbrisa podatkov</li>
+                <li>Pravica do omejitve obdelave</li>
+                <li>Pravica do prenosljivosti podatkov</li>
+                <li>Pravica do preklica privolitve</li>
+            </ul>
+
+            <h2>8. Piškotki</h2>
+            <p>Naša spletna stran ne uporablja piškotkov za sledenje. Shranjujemo le nastavitve teme (svetla/temna), ki se hranijo lokalno v vašem brskalniku in se ne pošiljajo na naše strežnike.</p>
+
+            <h2>9. Posredovanje podatkov tretjim</h2>
+            <p>Vaših osebnih podatkov ne posredujemo, prodajamo ali oddajamo tretjim osebam, razen če je to potrebno za izpolnitev zakonskih obveznosti.</p>
+
+            <h2>10. Spremembe pogojev</h2>
+            <p>Pogoje zasebnosti lahko občasno posodobimo. O bistvenih spremembah vas bomo obvestili prek naše spletne strani. Priporočamo, da to stran občasno preverite.</p>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <img src="assets/logo_1-removebg-preview.png" alt="Canario" class="footer__logo">
+                <p>Pametnejše ločevanje za čistejšo Zemljo.</p>
+            </div>
+            <div class="footer__nav">
+                <h4>Navigacija</h4>
+                <a href="index.html">Domov</a>
+                <a href="index.html#o-nas">O nas</a>
+                <a href="index.html#izdelek">Izdelek</a>
+                <a href="index.html#ekipa">Ekipa</a>
+                <a href="index.html#kontakt">Kontakt</a>
+            </div>
+            <div class="footer__nav">
+                <h4>Strani</h4>
+                <a href="galerija.html"><i class="fa-solid fa-images"></i> Galerija slik</a>
+                <a href="kalkulator.html"><i class="fa-solid fa-calculator"></i> Finančni kalkulator</a>
+                <a href="igra.html"><i class="fa-solid fa-gamepad"></i> Preprosta igra</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Canario d.d. Vse pravice pridržane.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
