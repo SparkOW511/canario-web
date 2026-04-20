@@ -1,260 +1,168 @@
-/* ================================================
-   CANARIO – Interactive Features
-   1. Contact Form Validation
-   2. Light/Dark Theme Toggle
-   3. Show/Hide Content (Accordion + Toggles)
-   ================================================ */
+// ===== NAVIGATION =====
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+const header = document.getElementById('header');
 
-(function () {
-    'use strict';
+const closeMenu = () => {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('open');
+};
 
-    // ===== MOBILE NAVIGATION =====
-    var hamburger = document.getElementById('hamburger');
-    var navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+});
 
-    hamburger.addEventListener('click', function () {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('open');
-    });
+navLinks.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+});
 
-    navLinks.querySelectorAll('.nav__link').forEach(function (link) {
-        link.addEventListener('click', function () {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('open');
-        });
-    });
+window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
 
-    // Header scroll effect
-    var header = document.getElementById('header');
-    window.addEventListener('scroll', function () {
-        header.classList.toggle('scrolled', window.scrollY > 20);
-    });
+// ===== CONTACT FORM VALIDATION =====
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    const formSuccess = document.getElementById('formSuccess');
+    const fields = contactForm.querySelectorAll('input, select, textarea');
 
-    // ===== 1. CONTACT FORM VALIDATION =====
-    var contactForm = document.getElementById('contactForm');
-    var formSuccess = document.getElementById('formSuccess');
-    if (contactForm) {
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRe = /^[\d\s+\-()]{6,20}$/;
 
-    var fields = {
-        name: {
-            element: document.getElementById('name'),
-            error: document.getElementById('nameError'),
-            validate: function (val) {
-                if (!val.trim()) return 'Ime in priimek je obvezno polje.';
-                if (val.trim().length < 3) return 'Vnesite vsaj 3 znake.';
-                if (!/^[a-zA-ZčšžČŠŽáéíóúàèìòùäöüÄÖÜ\s\-]+$/.test(val.trim()))
-                    return 'Ime lahko vsebuje samo črke in presledke.';
-                return '';
-            }
-        },
-        email: {
-            element: document.getElementById('email'),
-            error: document.getElementById('emailError'),
-            validate: function (val) {
-                if (!val.trim()) return 'E-pošta je obvezno polje.';
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()))
-                    return 'Vnesite veljaven e-poštni naslov.';
-                return '';
-            }
-        },
-        phone: {
-            element: document.getElementById('phone'),
-            error: document.getElementById('phoneError'),
-            validate: function (val) {
-                if (val.trim() && !/^[\d\s\+\-\(\)]{6,20}$/.test(val.trim()))
-                    return 'Vnesite veljavno telefonsko številko.';
-                return '';
-            }
-        },
-        subject: {
-            element: document.getElementById('subject'),
-            error: document.getElementById('subjectError'),
-            validate: function (val) {
-                if (!val) return 'Izberite zadevo.';
-                return '';
-            }
-        },
-        message: {
-            element: document.getElementById('message'),
-            error: document.getElementById('messageError'),
-            validate: function (val) {
-                if (!val.trim()) return 'Sporočilo je obvezno polje.';
-                if (val.trim().length < 10) return 'Sporočilo mora imeti vsaj 10 znakov.';
-                return '';
-            }
-        },
-        privacy: {
-            element: document.getElementById('privacy'),
-            error: document.getElementById('privacyError'),
-            validate: function () {
-                if (!document.getElementById('privacy').checked)
-                    return 'Strinjati se morate s pogoji zasebnosti.';
-                return '';
-            }
-        }
+    const getError = el => {
+        if (el.type === 'checkbox') return el.checked ? '' : 'Strinjati se morate s pogoji zasebnosti.';
+        const val = el.value.trim();
+        if (!val) return 'To polje je obvezno.';
+        if (el.id === 'email' && !emailRe.test(val)) return 'Vnesite veljaven e-poštni naslov.';
+        if (el.id === 'phone' && !phoneRe.test(val)) return 'Vnesite veljavno telefonsko številko.';
+        if (el.id === 'message' && val.length < 10) return 'Sporočilo mora imeti vsaj 10 znakov.';
+        return '';
     };
 
-    function validateField(name) {
-        var field = fields[name];
-        var value = field.element.type === 'checkbox' ? '' : field.element.value;
-        var errorMsg = field.validate(value);
-        field.error.textContent = errorMsg;
-
-        if (field.element.type !== 'checkbox') {
-            field.element.classList.remove('error', 'valid');
-            if (errorMsg) field.element.classList.add('error');
-            else if (value.trim()) field.element.classList.add('valid');
+    const validateField = el => {
+        const msg = getError(el);
+        const errorEl = document.getElementById(el.id + 'Error');
+        if (errorEl) errorEl.textContent = msg;
+        if (el.type !== 'checkbox') {
+            el.classList.toggle('error', !!msg);
+            el.classList.toggle('valid', !msg && !!el.value.trim());
         }
-        return !errorMsg;
-    }
+        return !msg;
+    };
 
-    Object.keys(fields).forEach(function (name) {
-        var field = fields[name];
-        var eventType = field.element.type === 'checkbox' ? 'change' : 'input';
-        field.element.addEventListener(eventType, function () { validateField(name); });
+    fields.forEach(el => {
+        const event = el.type === 'checkbox' ? 'change' : 'input';
+        el.addEventListener(event, () => validateField(el));
     });
 
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', e => {
         e.preventDefault();
-        var allValid = true;
-        Object.keys(fields).forEach(function (name) {
-            if (!validateField(name)) allValid = false;
-        });
+        const allValid = [...fields].every(validateField);
+        if (!allValid) return;
 
-        if (allValid) {
-            formSuccess.classList.add('visible');
-            contactForm.reset();
-            Object.keys(fields).forEach(function (name) {
-                fields[name].element.classList.remove('valid', 'error');
-                fields[name].error.textContent = '';
-            });
-            setTimeout(function () { formSuccess.classList.remove('visible'); }, 5000);
-        }
+        formSuccess.classList.add('visible');
+        contactForm.reset();
+        fields.forEach(el => el.classList.remove('valid', 'error'));
+        setTimeout(() => formSuccess.classList.remove('visible'), 5000);
     });
-    } // end contactForm guard
+}
 
-    // ===== 2. LIGHT/DARK THEME TOGGLE =====
-    var themeToggle = document.getElementById('themeToggle');
-    var themeIcon = document.getElementById('themeIcon');
+// ===== LIGHT/DARK THEME =====
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const THEME_KEY = 'canario-theme';
 
-    function getPreferredTheme() {
-        var stored = localStorage.getItem('canario-theme');
-        if (stored) return stored;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
+const getPreferredTheme = () => {
+    const stored = localStorage.getItem(THEME_KEY);
+    if (stored) return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
 
-    function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('canario-theme', theme);
-        if (theme === 'dark') {
-            themeIcon.className = 'fa-solid fa-sun';
-        } else {
-            themeIcon.className = 'fa-solid fa-moon';
-        }
-    }
+const setTheme = theme => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem(THEME_KEY, theme);
+    themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+};
 
-    setTheme(getPreferredTheme());
+setTheme(getPreferredTheme());
 
-    themeToggle.addEventListener('click', function () {
-        var current = document.documentElement.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
+themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// ===== SHOW / HIDE CONTENT =====
+document.querySelectorAll('.feature-card__toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const detail = document.getElementById(btn.dataset.toggle);
+        detail.classList.toggle('open');
+        btn.classList.toggle('open');
     });
+});
 
-    // ===== 3. SHOW/HIDE CONTENT =====
-
-    // Feature card toggles
-    document.querySelectorAll('.feature-card__toggle').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var targetId = btn.getAttribute('data-toggle');
-            var detail = document.getElementById(targetId);
-            var isOpen = detail.classList.contains('open');
-            detail.classList.toggle('open');
-            btn.classList.toggle('open');
-        });
+const accordionItems = document.querySelectorAll('.accordion-item');
+accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-item__header');
+    header.addEventListener('click', () => {
+        const wasActive = item.classList.contains('active');
+        accordionItems.forEach(el => el.classList.remove('active'));
+        if (!wasActive) item.classList.add('active');
     });
+});
 
-    // Product accordion
-    document.querySelectorAll('.accordion-item__header').forEach(function (header) {
-        header.addEventListener('click', function () {
-            var item = header.parentElement;
-            var wasActive = item.classList.contains('active');
-
-            document.querySelectorAll('.accordion-item').forEach(function (el) {
-                el.classList.remove('active');
-            });
-
-            if (!wasActive) {
-                item.classList.add('active');
-            }
-        });
+// ===== SCROLL ANIMATIONS =====
+const animateObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const delay = parseInt(entry.target.dataset.delay) || 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        obs.unobserve(entry.target);
     });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    // ===== SCROLL ANIMATIONS =====
-    var animatedElements = document.querySelectorAll('[data-animate]');
+document.querySelectorAll('[data-animate]').forEach(el => animateObserver.observe(el));
 
-    var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                var delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
-                setTimeout(function () {
-                    entry.target.classList.add('visible');
-                }, delay);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+// ===== ANIMATED COUNTERS =====
+const counterObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        const duration = 1500;
+        let startTime = null;
 
-    animatedElements.forEach(function (el) { observer.observe(el); });
+        const step = timestamp => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target).toLocaleString('sl-SI');
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target.toLocaleString('sl-SI');
+        };
 
-    // ===== ANIMATED COUNTERS =====
-    var counterElements = document.querySelectorAll('[data-count]');
-
-    var counterObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                var el = entry.target;
-                var target = parseInt(el.getAttribute('data-count'));
-                var duration = 1500;
-                var start = 0;
-                var startTime = null;
-
-                function animateCount(timestamp) {
-                    if (!startTime) startTime = timestamp;
-                    var progress = Math.min((timestamp - startTime) / duration, 1);
-                    var eased = 1 - Math.pow(1 - progress, 3);
-                    var current = Math.floor(eased * target);
-                    el.textContent = current.toLocaleString('sl-SI');
-                    if (progress < 1) requestAnimationFrame(animateCount);
-                    else el.textContent = target.toLocaleString('sl-SI');
-                }
-
-                requestAnimationFrame(animateCount);
-                counterObserver.unobserve(el);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    counterElements.forEach(function (el) { counterObserver.observe(el); });
-
-    // ===== ACTIVE NAV LINK HIGHLIGHT =====
-    var sections = document.querySelectorAll('section[id]');
-    var navLinksAll = document.querySelectorAll('.nav__link');
-
-    window.addEventListener('scroll', function () {
-        var scrollY = window.scrollY + 100;
-        sections.forEach(function (section) {
-            var top = section.offsetTop;
-            var height = section.offsetHeight;
-            var id = section.getAttribute('id');
-            if (scrollY >= top && scrollY < top + height) {
-                navLinksAll.forEach(function (link) {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + id) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
+        requestAnimationFrame(step);
+        obs.unobserve(el);
     });
+}, { threshold: 0.5 });
 
-})();
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// ===== ACTIVE NAV LINK HIGHLIGHT =====
+const sections = document.querySelectorAll('section[id]');
+if (sections.length) {
+    const navLinksAll = document.querySelectorAll('.nav__link');
+    const setActiveLink = id => {
+        navLinksAll.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+    };
+
+    const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) setActiveLink(entry.target.id);
+        });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+
+    sections.forEach(section => navObserver.observe(section));
+}

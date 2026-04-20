@@ -21,14 +21,8 @@ const wasteItems = [
     { name: 'Tetrapak', emoji: '🧃', type: 'suhi' },
 ];
 
-let score = 0;
-let streak = 0;
-let round = 0;
-let timeLeft = 30;
-let timerInterval = null;
-let currentItem = null;
-let isPlaying = false;
-const totalRounds = 15;
+const TOTAL_ROUNDS = 15;
+const START_TIME = 30;
 
 const arena = document.getElementById('arena');
 const bins = document.getElementById('bins');
@@ -41,6 +35,15 @@ const startBtn = document.getElementById('startBtn');
 const binWet = document.getElementById('binWet');
 const binDry = document.getElementById('binDry');
 
+let score = 0;
+let streak = 0;
+let round = 0;
+let timeLeft = START_TIME;
+let timerInterval = null;
+let currentItem = null;
+let isPlaying = false;
+let itemQueue = [];
+
 function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -50,13 +53,17 @@ function shuffle(arr) {
     return a;
 }
 
-let itemQueue = [];
+function updateTimer() {
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+}
 
 function startGame() {
     score = 0;
     streak = 0;
     round = 0;
-    timeLeft = 30;
+    timeLeft = START_TIME;
     isPlaying = true;
     itemQueue = shuffle(wasteItems);
 
@@ -68,35 +75,23 @@ function startGame() {
     updateTimer();
     nextItem();
 
+    clearInterval(timerInterval);
     timerInterval = setInterval(() => {
         timeLeft--;
         updateTimer();
-        if (timeLeft <= 0) {
-            endGame();
-        }
+        if (timeLeft <= 0) endGame();
     }, 1000);
 }
 
-function updateTimer() {
-    const mins = Math.floor(timeLeft / 60);
-    const secs = timeLeft % 60;
-    timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-}
-
 function nextItem() {
-    if (round >= totalRounds || !isPlaying) {
-        endGame();
-        return;
-    }
+    if (!isPlaying) return;
+    if (round >= TOTAL_ROUNDS) return endGame();
 
-    if (itemQueue.length === 0) {
-        itemQueue = shuffle(wasteItems);
-    }
-
+    if (itemQueue.length === 0) itemQueue = shuffle(wasteItems);
     currentItem = itemQueue.pop();
     round++;
     roundEl.textContent = round;
-    progressFill.style.width = ((round - 1) / totalRounds * 100) + '%';
+    progressFill.style.width = ((round - 1) / TOTAL_ROUNDS * 100) + '%';
 
     arena.innerHTML = `
         <div class="game__item">
@@ -114,8 +109,7 @@ function handleBin(selectedType) {
 
     if (isCorrect) {
         streak++;
-        const bonus = streak >= 3 ? 5 : 0;
-        score += 10 + bonus;
+        score += 10 + (streak >= 3 ? 5 : 0);
         binEl.classList.add('correct');
     } else {
         streak = 0;
@@ -132,24 +126,25 @@ function handleBin(selectedType) {
     }, 400);
 }
 
+function endGameMessage(s) {
+    if (s >= 120) return 'Odlično! Ste mojster ločevanja! ♻️';
+    if (s >= 80) return 'Zelo dobro! Znanje imate. 👏';
+    if (s >= 40) return 'Solidno, a lahko bolje! 💪';
+    return 'Potrebujete Canario smetnjak! 😄';
+}
+
 function endGame() {
     isPlaying = false;
     clearInterval(timerInterval);
     bins.style.display = 'none';
     progressFill.style.width = '100%';
 
-    let message = '';
-    if (score >= 120) message = 'Odlično! Ste mojster ločevanja! ♻️';
-    else if (score >= 80) message = 'Zelo dobro! Znanje imate. 👏';
-    else if (score >= 40) message = 'Solidno, a lahko bolje! 💪';
-    else message = 'Potrebujete Canario smetnjak! 😄';
-
     arena.innerHTML = `
         <div class="game__over">
             <i class="fa-solid fa-trophy"></i>
             <h3>Igra končana!</h3>
             <div class="final-score">${score} točk</div>
-            <p>${message}</p>
+            <p>${endGameMessage(score)}</p>
             <button class="btn btn--primary" onclick="startGame()">
                 <i class="fa-solid fa-rotate-right"></i> Igraj znova
             </button>

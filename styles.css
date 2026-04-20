@@ -1,18 +1,10 @@
-/* ================================================
-   CANARIO – Eco Design System
-   Organic, nature-inspired, sustainability-first
-   ================================================ */
-
-/* ===== RESET ===== */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ===== DESIGN TOKENS ===== */
 :root {
-    /* Color — Nature palette */
     --c-primary: #2D6A4F;
     --c-primary-vibrant: #40916C;
     --c-primary-light: #52B788;
@@ -22,7 +14,6 @@
     --c-accent-light: #DDA15E;
     --c-accent-glow: #FEFAE0;
 
-    /* Surfaces */
     --bg: #F7FAF5;
     --bg-tinted: #EFF5EC;
     --surface: #FFFFFF;
@@ -30,24 +21,20 @@
     --border: #D2DED0;
     --border-light: #E8EFE6;
 
-    /* Text */
     --text: #1B2E1B;
     --text-secondary: #4A6349;
     --text-muted: #7A917A;
     --text-inverse: #F7FAF5;
 
-    /* Feedback */
     --danger: #C53030;
     --danger-bg: #FFF5F5;
     --success: #2D6A4F;
     --success-bg: #D8F3DC;
 
-    /* Dark mode surfaces */
     --dark-bg: #0D1F16;
     --dark-surface: #162B1E;
     --dark-border: #274D36;
 
-    /* Typography */
     --ff-display: 'Fraunces', Georgia, serif;
     --ff-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 
@@ -58,7 +45,6 @@
     --fs-small: 0.875rem;
     --fs-xs: 0.8rem;
 
-    /* Spacing */
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
@@ -67,26 +53,22 @@
     --space-2xl: 64px;
     --space-3xl: 96px;
 
-    /* Shapes */
     --radius: 16px;
     --radius-sm: 10px;
     --radius-xs: 6px;
     --radius-full: 100px;
 
-    /* Shadows */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
     --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.1);
     --shadow-green: 0 8px 32px rgba(45, 106, 79, 0.15);
 
-    /* Motion */
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --duration: 0.3s;
     --duration-slow: 0.5s;
 }
 
-/* ===== DARK MODE ===== */
 [data-theme="dark"] {
     --bg: #0D1F16;
     --bg-tinted: #132A1C;
@@ -107,7 +89,6 @@
     --c-accent-glow: #2A2010;
 }
 
-/* ===== BASE ===== */
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
@@ -134,7 +115,6 @@ button { font-family: inherit; }
     padding: 0 var(--space-lg);
 }
 
-/* ===== TYPOGRAPHY ===== */
 h1, h2, h3 { font-family: var(--ff-display); }
 
 em {
@@ -146,7 +126,6 @@ em {
     color: var(--c-primary-light);
 }
 
-/* ===== BUTTONS ===== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -195,7 +174,6 @@ em {
     width: 100%;
 }
 
-/* ===== HEADER ===== */
 .header {
     position: fixed;
     top: 0;
@@ -317,7 +295,6 @@ em {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ===== SEARCH OVERLAY ===== */
 .search-overlay {
     position: fixed;
     inset: 0;
@@ -448,7 +425,6 @@ em {
     color: var(--text-muted);
 }
 
-/* ===== HERO ===== */
 .hero {
     position: relative;
     padding: 140px 0 80px;
@@ -602,7 +578,6 @@ em {
     object-fit: cover;
 }
 
-/* ===== SECTIONS ===== */
 .section {
     padding: var(--space-3xl) 0;
 }
@@ -644,7 +619,6 @@ em {
     line-height: 1.7;
 }
 
-/* ===== FEATURE CARDS ===== */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -738,7 +712,6 @@ em {
     border-top: 1px solid var(--border-light);
 }
 
-/* ===== STATS BAR ===== */
 .stats-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -774,7 +747,6 @@ em {
     margin-top: 4px;
 }
 
-/* ===== PRODUCT SECTION ===== */
 .product-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -822,7 +794,6 @@ em {
     letter-spacing: 0.5px;
 }
 
-/* Accordion */
 .accordion-item {
     border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
@@ -890,7 +861,6 @@ em {
     line-height: 1.7;
 }
 
-/* ===== CALCULATOR ===== */
 .calculator {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1022,7 +992,6 @@ em {
     color: var(--c-primary);
 }
 
-/* ===== GAME ===== */
 .game {
     max-width: 600px;
     margin: 0 auto;
@@ -1159,7 +1128,6 @@ em {
     75% { transform: translateX(4px); }
 }
 
-/* ===== TEAM ===== */
 .team-photo {
     margin-bottom: var(--space-xl);
     border-radius: var(--radius);
@@ -1239,7 +1207,6 @@ em {
     font-size: var(--fs-small);
 }
 
-/* ===== CONTACT ===== */
 .contact-layout {
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
@@ -1407,7 +1374,6 @@ em {
     line-height: 1.6;
 }
 
-/* ===== FOOTER ===== */
 .footer {
     background: var(--c-primary);
     color: rgba(255, 255, 255, 0.9);
@@ -1475,7 +1441,6 @@ em {
     opacity: 0.5;
 }
 
-/* ===== ANIMATIONS ===== */
 [data-animate] {
     opacity: 0;
     transform: translateY(24px);
@@ -1487,7 +1452,6 @@ em {
     transform: translateY(0);
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
     .hero__visual { display: none; }
 

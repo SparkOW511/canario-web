@@ -1,32 +1,42 @@
+const num = (id, fallback) => {
+    const v = parseFloat(document.getElementById(id).value);
+    return Number.isFinite(v) ? v : fallback;
+};
+
+const setText = (id, value) => {
+    document.getElementById(id).textContent = value;
+};
+
+const eur = n => Math.round(n) + ' EUR';
+
 function calculate() {
-    const members = parseInt(document.getElementById('members').value) || 4;
-    const wasteKg = parseFloat(document.getElementById('wasteKg').value) || 80;
-    const sortRate = parseFloat(document.getElementById('sortRate').value) || 50;
-    const penaltyFee = parseFloat(document.getElementById('penaltyFee').value) || 15;
-    const canarioPrice = parseFloat(document.getElementById('canarioPrice').value) || 199;
-    const years = parseInt(document.getElementById('years').value) || 3;
+    const wasteKg = num('wasteKg', 80);
+    const sortRate = num('sortRate', 50);
+    const penaltyFee = num('penaltyFee', 15);
+    const canarioPrice = num('canarioPrice', 199);
+    const years = Math.max(1, num('years', 3));
 
     const months = years * 12;
     const canarioSortRate = 95;
-    const improvementPct = (canarioSortRate - sortRate) / 100;
+    const improvement = Math.max(0, (canarioSortRate - sortRate) / 100);
 
-    const penaltySavings = penaltyFee * months * (improvementPct > 0 ? improvementPct : 0);
-    const transportSavings = wasteKg * 0.08 * months * (improvementPct > 0 ? improvementPct : 0);
+    const penaltySavings = penaltyFee * months * improvement;
+    const transportSavings = wasteKg * 0.08 * months * improvement;
     const totalSavings = penaltySavings + transportSavings - canarioPrice;
 
     const monthlySaving = (penaltySavings + transportSavings) / months;
-    const roiMonths = monthlySaving > 0 ? Math.ceil(canarioPrice / monthlySaving) : Infinity;
+    const roiMonths = monthlySaving > 0 ? Math.ceil(canarioPrice / monthlySaving) : null;
 
-    const extraRecycled = wasteKg * improvementPct * months;
+    const extraRecycled = wasteKg * improvement * months;
     const co2Saved = extraRecycled * 0.5;
 
-    document.getElementById('resPenalty').textContent = penaltySavings.toFixed(0) + ' EUR';
-    document.getElementById('resTransport').textContent = transportSavings.toFixed(0) + ' EUR';
-    document.getElementById('resPrice').textContent = '–' + canarioPrice.toFixed(0) + ' EUR';
-    document.getElementById('resTotal').textContent = (totalSavings >= 0 ? '' : '–') + Math.abs(totalSavings).toFixed(0) + ' EUR';
-    document.getElementById('resRoi').textContent = roiMonths === Infinity ? 'N/A' : roiMonths + ' mesecev';
-    document.getElementById('ecoRecycled').textContent = extraRecycled.toFixed(0) + ' kg';
-    document.getElementById('ecoCo2').textContent = co2Saved.toFixed(0) + ' kg CO₂';
+    setText('resPenalty', eur(penaltySavings));
+    setText('resTransport', eur(transportSavings));
+    setText('resPrice', '–' + eur(canarioPrice));
+    setText('resTotal', (totalSavings < 0 ? '–' : '') + eur(Math.abs(totalSavings)));
+    setText('resRoi', roiMonths ? roiMonths + ' mesecev' : 'N/A');
+    setText('ecoRecycled', Math.round(extraRecycled) + ' kg');
+    setText('ecoCo2', Math.round(co2Saved) + ' kg CO₂');
 }
 
 document.getElementById('calcBtn').addEventListener('click', calculate);
